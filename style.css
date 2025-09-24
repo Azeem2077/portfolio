@@ -1,0 +1,76 @@
+/* General */
+* { margin:0; padding:0; box-sizing:border-box; font-family: Arial, sans-serif;}
+html, body { height: 100%; }
+body { display: flex; flex-direction: column; min-height: 100vh; background: linear-gradient(120deg, #f0f4f8, #e8f9fb, #ffffff); color: #222; text-align: center; }
+
+/* Header */
+header {
+  background: linear-gradient(90deg, #000, #000 8%, #47c5d6 100%);
+  padding: 20px;
+  position: sticky; top: 0; z-index: 100;
+  color: white;
+}
+header h1 { margin-bottom: 10px; }
+header nav a {
+  margin: 0 15px; text-decoration: none; color: white; font-weight: bold; transition: color 0.3s;
+}
+header nav a:hover { color: #47c5d6; }
+
+/* Sections */
+section { padding: 60px 20px; flex: 1; }
+
+/* Skills */
+.skills-container { max-width: 600px; margin: auto; }
+.skill { margin: 15px 0; text-align: left; }
+.bar { background: #ddd; border-radius: 10px; overflow: hidden; }
+.progress { height: 10px; background: #47c5d6; border-radius: 10px; }
+
+/* Slideshow */
+.slideshow-container { position: relative; max-width: 600px; margin: auto; }
+.slide { display: none; padding: 20px; border: 2px solid #47c5d6; border-radius: 10px; background: #fff; }
+.fade { animation: fade 1.5s; }
+@keyframes fade { from {opacity: 0.4;} to {opacity: 1;} }
+
+/* Buttons */
+.btn {
+  display: inline-block; margin-top: 10px;
+  padding: 10px 20px; background: #47c5d6;
+  color: black; border-radius: 8px;
+  font-weight: bold; text-decoration: none;
+  transition: transform 0.3s, background 0.3s;
+}
+.btn:hover { transform: scale(1.1); background: #00eaff; }
+
+/* Footer */
+footer {
+  background: linear-gradient(90deg, #000, #000 8%, #47c5d6 100%);
+  padding: 15px; color: white; margin-top: auto;
+}
+
+/* Typewriter Effect */
+#aboutText {
+  font-size: 1.3rem;       /* increase text size */
+  line-height: 1.6;         /* space between lines */
+  max-width: 700px;         /* control width */
+  margin: 20px auto;        /* center */
+  text-align: center;
+}
+#aboutText::after {
+  content: '|';
+  animation: blink 1s infinite;
+  margin-left: 2px;
+  color: #47c5d6;
+}
+@keyframes blink { 0%,50%,100% {opacity:1;} 25%,75% {opacity:0;} }
+
+/* ---------------- BATMAN ---------------- */
+#batman {
+  position: fixed; width: 60px; height: auto; pointer-events: none; z-index: 9999;
+  filter: drop-shadow(0 0 15px #00eaff); transition: transform 0.2s linear;
+}
+.trail {
+  position: fixed; width: 20px; height: 20px; border-radius: 50%;
+  background: rgba(0,234,255,0.7); box-shadow: 0 0 15px rgba(0,234,255,0.9);
+  pointer-events: none; animation: fadeTrail 0.8s linear forwards; z-index: 9998;
+}
+@keyframes fadeTrail { from {opacity:1; transform: scale(1);} to {opacity:0; transform: scale(0.2);} }
