@@ -1,86 +1,249 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Portfolio</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SYED AZEEMUDDIN | Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Poppins',sans-serif;background:#0a0a0a;color:#ffffff;overflow-x:hidden}
+
+/* NAV */
+.navbar{position:fixed;top:0;width:100%;padding:20px 50px;background:rgba(10,10,10,0.95);backdrop-filter:blur(20px);z-index:1000}
+.nav-container{max-width:1200px;margin:auto;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:1.6rem;font-weight:700;background:linear-gradient(45deg,#00d4ff,#ffffff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav-menu{display:flex;gap:30px}
+.nav-link{color:#fff;text-decoration:none;position:relative}
+.nav-link::after{content:"";position:absolute;width:0;height:2px;background:#00d4ff;bottom:-5px;left:0;transition:.3s}
+.nav-link:hover::after{width:100%}
+
+/* HERO */
+.hero{height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 80%, rgba(120,119,198,0.3),transparent 50%),radial-gradient(circle at 80% 20%, rgba(255,119,198,0.3),transparent 50%);animation:rotateBg 15s infinite linear}
+@keyframes rotateBg{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+.hero-content{z-index:2}
+.hero-title{font-size:clamp(3rem,7vw,5rem);font-weight:700;background:linear-gradient(45deg,#00d4ff,#fff,#00d4ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-sub{color:#b0b0b0;margin:20px 0}
+.cta{padding:14px 30px;background:#00d4ff;border-radius:30px;text-decoration:none;color:#000;font-weight:600}
+
+.section{padding:100px 20px;max-width:1100px;margin:auto}
+.section-title{text-align:center;font-size:2.5rem;margin-bottom:60px;background:linear-gradient(45deg,#00d4ff,#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+
+/* ABOUT */
+.about{text-align:center;color:#b0b0b0;max-width:700px;margin:auto}
+
+/* SKILLS */
+.skills{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.skills span{padding:10px 16px;background:rgba(255,255,255,0.05);border-radius:20px;border:1px solid rgba(255,255,255,0.1)}
+
+/* PROJECTS */
+.carousel-wrapper{position:relative}
+.carousel{display:flex;gap:30px;overflow-x:auto;scroll-behavior:smooth;padding:20px 10px}
+.carousel::-webkit-scrollbar{display:none}
+
+/* premium card */
+.card{min-width:320px;background:linear-gradient(145deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02));border-radius:18px;border:1px solid rgba(255,255,255,0.08);transition:all .4s ease;position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;inset:-1px;background:linear-gradient(120deg,transparent,#00d4ff55,transparent);opacity:0;transition:.4s;pointer-events:none}
+.card:hover::before{opacity:1}
+.card:hover{transform:translateY(-12px) scale(1.02);box-shadow:0 30px 80px rgba(0,212,255,0.25)}
+
+.card-content{padding:40px 30px;text-align:left}
+.card h3{font-size:28px;margin-bottom:12px;letter-spacing:.5px}
+.card p{color:#9ca3af;font-size:14px;line-height:1.6}
+
+/* tech tags */
+.tech{margin-top:15px;display:flex;gap:8px;flex-wrap:wrap}
+.tech span{font-size:12px;padding:6px 10px;border-radius:20px;background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.2);color:#00d4ff}
+
+/* project buttons */
+.project-links{
+  margin-top:20px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:14px;
+}
+
+.project-links a{
+  display:inline-block;
+  text-decoration:none;
+  font-size:15px;
+  padding:14px 26px;
+  border-radius:30px;
+  background:rgba(0,212,255,0.15);
+  border:1px solid rgba(0,212,255,0.5);
+  color:#00d4ff;
+  transition:.3s;
+  font-weight:500;
+  min-width:160px;
+  text-align:center;
+}
+
+.project-links a:hover{
+  background:#00d4ff;
+  color:#000;
+  transform:translateY(-3px);
+}
+
+/* fix spacing between tech and buttons */
+.tech{margin-bottom:10px}
+.project-links a{
+  text-decoration:none;
+  font-size:13px;
+  padding:8px 14px;
+  border-radius:20px;
+  background:rgba(0,212,255,0.1);
+  border:1px solid rgba(0,212,255,0.3);
+  color:#00d4ff;
+  transition:.3s
+}
+.project-links a:hover{
+  background:#00d4ff;
+  color:#000
+}
+
+/* subtle entrance animation for cards */
+.card{opacity:0;transform:translateY(30px);animation:cardIn .8s forwards}
+.card:nth-child(1){animation-delay:.1s}
+.card:nth-child(2){animation-delay:.2s}
+.card:nth-child(3){animation-delay:.3s}
+.card:nth-child(4){animation-delay:.4s}
+.card:nth-child(5){animation-delay:.5s}
+@keyframes cardIn{to{opacity:1;transform:translateY(0)}}
+
+.carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.6);border:none;color:#fff;padding:12px 16px;cursor:pointer;border-radius:50%;z-index:10;transition:.3s}
+.carousel-btn:hover{background:#00d4ff;color:#000}
+.carousel-btn.left{left:-10px}
+.carousel-btn.right{right:-10px}
+
+/* ANIMATION */
+.fade-up{opacity:0;transform:translateY(40px);transition:all 0.8s ease}
+.fade-up.show{opacity:1;transform:translateY(0)}
+
+/* CONTACT */
+.contact{text-align:center;color:#b0b0b0}
+footer{text-align:center;padding:30px;color:#888;border-top:1px solid rgba(255,255,255,0.1)}
+</style>
 </head>
+
 <body>
 
-  <!-- Header -->
-  <header>
-    <h1>Syed Azeemuddin</h1>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
+<nav class="navbar">
+<div class="nav-container">
+<div class="logo">SAU</div>
+<div class="nav-menu">
+<a href="#about" class="nav-link">About</a>
+<a href="#skills" class="nav-link">Skills</a>
+<a href="#projects" class="nav-link">Projects</a>
+<a href="#contact" class="nav-link">Contact</a>
+<a href="Syed_Azeemuddin_Resume.pdf" class="nav-link">Resume</a>
+</div>
+</div>
+</nav>
 
-  <!-- About -->
-  <section id="about">
-    <h2>About Me</h2>
-    <p id="aboutText"></p>
-  </section>
-
-  <!-- Skills -->
-  <section id="skills">
-    <h2>My Skills</h2>
-    <div class="skills-container">
-      <div class="skill">
-        <span>HTML / CSS</span>
-        <div class="bar"><div class="progress" style="width: 60%"></div></div>
-      </div>
-      <div class="skill">
-        <span>JavaScript</span>
-        <div class="bar"><div class="progress" style="width: 40%"></div></div>
-      </div>
-      <div class="skill">
-        <span>Python</span>
-        <div class="bar"><div class="progress" style="width: 55%"></div></div>
-      </div>
-      <div class="skill">
-        <span>Flutter</span>
-        <div class="bar"><div class="progress" style="width: 35%"></div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Projects -->
-  <section id="projects">
-  <h2>My Projects</h2>
-  <div class="slideshow-container">
-    <div class="slide fade">
-      <h3>🌐 Web App</h3>
-      <p><a href="https://assurepride.com/" target="_blank">Visit Project</a></p>
-    </div>
-    <div class="slide fade">
-      <h3>📱 Mobile App</h3>
-      <a href="https://drive.google.com/file/d/1fjEBI5uQKgHFGb59u-1qAG6dPOOwfkyk/view?usp=sharing" class="btn">📥 Download APK</a>
-    </div>
-    <div class="slide fade">
-      <h3>💻 Python App</h3>
-      <a href="https://drive.google.com/file/d/1lA-dRZYDEQmCLCcbefe_a4Joeq2Igx8R/view?usp=sharing" class="btn">💻 Download EXE</a>
-    </div>
-  </div>
+<section class="hero">
+<div class="hero-content">
+<h1 class="hero-title">Hi, I'm SYED AZEEMUDDIN</h1>
+<p class="hero-sub">Developer building web, mobile and desktop applications</p>
+<a href="#projects" class="cta">View My Work</a>
+</div>
 </section>
 
-  <!-- Contact -->
-  <section id="contact">
-    <h2>Contact Me</h2>
-    <p>📧 Email: <a href="mailto:yourmail@example.com">azeemudd231@gmail.com</a></p>
-  </section>
+<section id="about" class="section fade-up">
+<h2 class="section-title">About Me</h2>
+<p class="about">Technology professional with experience in IT support and software development.</p>
+</section>
 
-  <!-- Footer -->
-  <footer>
-    <p>© 2025 My Portfolio</p>
-  </footer>
+<section id="skills" class="section fade-up">
+<h2 class="section-title">Skills</h2>
+<div class="skills">
+<span>Python</span><span>Flutter</span><span>JavaScript</span><span>HTML/CSS</span><span>SQL</span><span>GitHub</span><span>AI Tools</span>
+</div>
+</section>
 
-  <!-- Batman -->
-  <img id="batman" src="batman.png" alt="Batman">
+<section id="projects" class="section fade-up">
+<h2 class="section-title">Projects</h2>
 
-  <script src="script.js"></script>
+<div class="carousel-wrapper">
+<button class="carousel-btn left" onclick="scrollProjects(-1)"><i class="fas fa-chevron-left"></i></button>
+
+<div class="carousel" id="projectCarousel">
+
+<div class="card"><div class="card-content">
+<h3>🌐 Client Website</h3>
+<p>Developed a real-world client website using a web builder platform. Customized layout, content, and UI based on client requirements and deployed it for live business use.</p>
+<div class="tech"><span>Web Builder</span><span>UI Design</span><span>Deployment</span></div>
+<div class="project-links">
+<a href="https://assurepride.com/" target="_blank">Live Website</a>
+</div>
+</div></div>
+
+<div class="card"><div class="card-content">
+<h3>🎬 YouTube Downloader</h3>
+<p>Desktop downloader built with Python using yt-dlp. Custom UI for selecting resolution, format, and download queue with real-time progress.</p>
+<div class="tech"><span>Python</span><span>PyQt</span><span>yt-dlp</span></div>
+<div class="project-links">
+<a href="https://drive.google.com/drive/folders/1_gPxNFIitw4Z4lBWc71GD6vUFhWlVQOL?usp=sharing" target="_blank">View Project</a>
+</div>
+</div></div>
+
+<div class="card"><div class="card-content">
+<h3>🎮 Game Launcher</h3>
+<p>Custom game launcher built in Python with PyQt. Manages local game library, displays cover art, and launches executables with a clean navigation UI.</p>
+<div class="tech"><span>Python</span><span>PyQt</span><span>UI</span></div>
+<div class="project-links">
+<a href="https://drive.google.com/file/d/1cKGaJhrmuZATcs9kSSjFu7CnuunHpWPQ/view?usp=sharing" target="_blank">View Project</a>
+</div>
+</div></div>
+
+<div class="card"><div class="card-content">
+<h3>🖥️ Desktop Application</h3>
+<p>Image processing and automation tool built in Python. Uses OpenCV (vision), NumPy (data), Pillow (image ops), PyQt5 (UI), pytesseract (OCR), rembg (background removal), and ONNX Runtime for optimized inference. Packaged as standalone EXE.</p>
+<div class="tech"><span>Python</span><span>OpenCV</span><span>NumPy</span><span>Pillow</span><span>PyQt5</span><span>OCR</span><span>ONNX</span></div>
+<div class="project-links">
+<a href="https://drive.google.com/file/d/1lA-dRZYDEQmCLCcbefe_a4Joeq2Igx8R/view" target="_blank">Download</a>
+</div>
+</div></div>
+
+<div class="card"><div class="card-content">
+<h3>📱 Flutter App</h3>
+<p>Mobile app developed using Flutter (Dart) with Android Studio. Integrated native Android components where needed using Kotlin and built APK for deployment.</p>
+<div class="tech"><span>Flutter</span><span>Dart</span><span>Kotlin</span><span>Android Studio</span></div>
+<div class="project-links">
+<a href="https://drive.google.com/file/d/1fjEBI5uQKgHFGb59u-1qAG6dPOOwfkyk/view" target="_blank">Download APK</a>
+</div>
+</div></div>
+
+
+</div>
+
+<button class="carousel-btn right" onclick="scrollProjects(1)"><i class="fas fa-chevron-right"></i></button>
+</div>
+
+</section>
+
+<section id="contact" class="section fade-up">
+<h2 class="section-title">Contact</h2>
+<p class="contact">azeemudd231@gmail.com</p>
+</section>
+
+<footer>© 2025 Syed Azeemuddin</footer>
+
+<script>
+function scrollProjects(direction){
+  const container=document.getElementById('projectCarousel');
+  container.scrollLeft += direction * 320;
+}
+
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')});
+});
+
+document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
+</script>
+
 </body>
 </html>
